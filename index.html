@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Példa oldal</title>
+  <style>
+
+    body {
+
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    }
+
+    .image-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .calculator {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>HTML Példa oldal</h1>
+
+  <h2>Input elemek:</h2>
+  <!-- Az input elem, amelyben a felhasználó ír valamit -->
+  <input type="text" id="inputText" placeholder="Írj ide valamit...">
+  <!-- Egy gomb, amely a felhasználó által megadott szöveget megjeleníti egy üzenetablakban -->
+  <button onclick="showInput()">Mutat</button>
+
+  <h2>Bevitel input elemről és prompt-ról:</h2>
+  <!-- Egy gomb, amely prompt-ot jelenít meg a felhasználónak, ahol valamit be tud írni -->
+  <button onclick="showPromptInput()">Mutat prompt</button>
+
+  <h2>Ciklusok szervezése:</h2>
+  <!-- Egy lista, ahova új elemeket lehet hozzáadni egy gomb lenyomásával -->
+  <ul id="loopList"></ul>
+  <!-- Egy gomb, amely hozzáad egy új elemet a listához -->
+  <button onclick="addToList()">Listához adás</button>
+
+  <h2>Egyszerű és összetett adattípusok:</h2>
+  <!-- Egy paragrafus, amelybe beírjuk egy összetett adattípus JSON reprezentációját -->
+  <p id="dataTypeExample"></p>
+
+  <h2>Form használata:</h2>
+  <!-- Egy űrlap, amelyben a felhasználó megadhatja a nevét és az email címét -->
+  <form onsubmit="submitForm(event)">
+    <input type="text" id="nameInput" placeholder="Név" required>
+    <input type="email" id="emailInput" placeholder="Email" required>
+    <button type="submit">Küldés</button>
+  </form>
+
+  <h2>Események bemutatása (pl. OnClick):</h2>
+  <!-- Egy paragrafus, amelyre kattintva a szöveg színe megváltozik -->
+  <p id="clickExample" onclick="changeColor()">Kattints ide</p>
+
+  <h2>Képnézegető:</h2>
+  <div class="image-container">
+    <!-- Egy kép, amelyet meg lehet változtatni egy gomb lenyomásával -->
+    <img id="image" src="Kep1.jpg" alt="Kép">
+    <button onclick="changeImage()">Kép váltása</button>
+  </div>
+
+  <h2>Számológép:</h2>
+  <div class="calculator">
+    <!-- Két számfeldolgozó bemeneti mező és egy gomb, amely összeadja a két számot -->
+    <input type="number" id="num1" placeholder="Szám 1">
+    <input type="number" id="num2" placeholder="Szám 2">
+    <button onclick="calculate()">Számol</button>
+    <!-- Eredmény megjelenítése -->
+    <p id="result"></p>
+  </div>
+
+  <script>
+    // Az input mező tartalmát megjeleníti egy üzenetablakban
+    function showInput() {
+      var inputText = document.getElementById("inputText").value;
+      alert(inputText);
+    }
+
+    // Prompt-ot jelenít meg, ahol a felhasználó írhat valamit, majd megjeleníti az írt szöveget egy üzenetablakban
+    function showPromptInput() {
+      var inputText = prompt("Írj ide valamit...");
+      alert(inputText);
+    }
+
+    // Hozzáad egy új elemet a listához
+    function addToList() {
+      var list = document.getElementById("loopList");
+      var listItem = document.createElement("li");
+      listItem.innerText = "Elem";
+      list.appendChild(listItem);
+    }
+
+    // Űrlap elküldése után üzenetablakban megjeleníti a megadott nevet és email címet
+    function submitForm(event) {
+      event.preventDefault();
+      var name = document.getElementById("nameInput").value;
+      var email = document.getElementById("emailInput").value;
+      alert("Név: " + name + "\nEmail: " + email);
+    }
+
+    // A paragrafus színét megváltoztatja pirosra, ha rákattintunk
+    function changeColor() {
+      var clickExample = document.getElementById("clickExample");
+      clickExample.style.color = "red";
+    }
+
+    // Kép váltása a képnézegetőben a kép gombra kattintva
+    function changeImage() {
+      var image = document.getElementById("image");
+      if (image.src.endsWith("Kep2.jpg")) {
+        image.src = "Kep1.jpg";
+      } else {
+        image.src = "Kep2.jpg";
+      }
+    }
+
+    // Kiszámolja a két szám összegét és megjeleníti az eredményt
+    function calculate() {
+      var num1 = parseFloat(document.getElementById("num1").value);
+      var num2 = parseFloat(document.getElementById("num2").value);
+      var result = document.getElementById("result");
+      result.innerText = "Eredmény: " + (num1 + num2);
+    }
+
+    // Példa összetett adattípus (JSON) megjelenítése a paragrafusban
+    var complexData = {
+      name: "John Doe",
+      age: 30,
+      address: {
+        city: "Budapest",
+        street: "Kossuth utca 1.",
+        zip: "1055"
+      }
+    };
+
+    document.getElementById("dataTypeExample").innerText = JSON.stringify(complexData);
+  </script>
+</body>
+</html>
